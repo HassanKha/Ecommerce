@@ -1,30 +1,15 @@
-'use client'
 
-import React from 'react'
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
-import CheckoutForm from './_components/CheckoutForm';
-import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import Checkout from '../checkout/_components/Checkout';
 
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHER_KEY);
 
+function CheckoutPage() {
 
-function Checkout() {
-const searchParams = useSearchParams()
-console.log(Number(searchParams.get('amount')))
-    const options = {
-       mode: 'payment',
-       currency: 'usd',
-       amount: Number(searchParams.get('amount'))*100
-      };
   return (
-    <Suspense>
-    <Elements stripe={stripePromise} options={options}>
-    <CheckoutForm amount={Number(searchParams.get('amount'))}/>
-  </Elements>
+    <Suspense fallback={<div>Loading...</div>}>
+ <Checkout/>
   </Suspense>
   )
 }
 
-export default Checkout
+export default CheckoutPage
