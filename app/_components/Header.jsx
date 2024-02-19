@@ -26,7 +26,7 @@ const [openCart,setOpenCart]=useState(false);
    const Carts = await CartsAois.getCarts(user.primaryEmailAddress.emailAddress);
    console.log(Carts?.data);
 
-   Carts?.data?.data.forEach(citem=> {
+   Carts?.data?.data?.forEach(citem=> {
     setCart((oldcart)=> [
         ...oldcart,
         {
